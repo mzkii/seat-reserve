@@ -32,7 +32,7 @@ data class Block(val name: String, val seats: List<Seat>) {
   }
 
   override fun toString(): String {
-    println("$name ブロック:")
+    var result = "$name block:\n"
     val maxCol = seats.maxOf { it.col }
     val minCol = seats.minOf { it.col }
     for (col in minCol..maxCol) {
@@ -40,9 +40,9 @@ data class Block(val name: String, val seats: List<Seat>) {
         .filter { it.col == col }
         .sortedBy { it.col }
         .joinToString(" ")
-      println(rows)
+      result += "$rows\n"
     }
-    return super.toString()
+    return result
   }
 }
 
@@ -71,7 +71,7 @@ fun printResults(resultList: List<LotteryResult>) {
 fun createBlocks() {
   for (blockName in 'A'..'I') {
     val seats = mutableListOf<Seat>()
-    for (col in 1..11) {
+    for (col in 1..12) {
       for (row in 1..16) {
         seats.add(Seat(isReserved = false, col = col, row = row))
       }
