@@ -30,7 +30,7 @@ private fun List<LotteryResult>.currentSuccessRate(): Double {
   return filterIsInstance<LotteryResult.Success>().size / size.toDouble()
 }
 
-var rate: Double = 0.22
+var rate: Double = 0.125
   private set
 
 private fun getRate(results: List<LotteryResult>): Double {

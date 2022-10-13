@@ -66,10 +66,18 @@ fun printResults(resultList: List<LotteryResult>) {
     val rate = totalSuccessCount.toDouble() / totalTryCount * 100
     println("$count 人の当選確率: $totalSuccessCount/$totalTryCount = ${(rate * 1000.0).roundToInt() / 1000.0}%")
   }
+  val successResult = resultList.filterIsInstance<LotteryResult.Success>()
+  val failedResult = resultList.filterIsInstance<LotteryResult.Failed>()
+  val capacityOverResult = failedResult.filterIsInstance<LotteryResult.Failed.CapacityOver>()
+  val capacityOverRate = capacityOverResult.size.toDouble() / failedResult.size * 100
+  println("total success count: ${successResult.size}")
+  println("total failed count: ${failedResult.size}")
+  println("total capacity over count: ${capacityOverResult.size}")
+  println("capacity over rate: ${(capacityOverRate * 1000.0).roundToInt() / 1000.0}%")
 }
 
 fun createBlocks() {
-  for (blockName in 'A'..'I') {
+  for (blockName in 'A'..'Z') {
     val seats = mutableListOf<Seat>()
     for (col in 1..12) {
       for (row in 1..16) {
